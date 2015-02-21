@@ -1,0 +1,9 @@
+{
+     "name": "Improved-mastermind",
+     "description": "DWEC_Mastermind",
+     "version": "0.0.1",
+     "dependencies": {
+        "express": "",
+        "socket.io": ""
+     }
+}

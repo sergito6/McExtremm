@@ -1,0 +1,1 @@
+console.log("Capturas y gestión de eventos (clicks de ratón, enters en cajas de texto...)  ");
