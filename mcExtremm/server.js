@@ -5,8 +5,9 @@ var express = require('express')
   ,	path = require("path")
   , io = require('socket.io').listen(server);
 
-server.listen(8080);
 
+server.listen(8080);
+app.use(express.static(__dirname + '/public'));
 // rutas
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/Inicio.html');
@@ -15,7 +16,6 @@ app.get('/'+':sala', function (req, res) {
   res.sendFile(__dirname + '/public/sala.html');
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
 
 var usernames = {};
 
@@ -46,10 +46,10 @@ io.sockets.on('connection', function (socket) {
 		console.log("el usuario "+socket.username +" se ha movido a la sala "+ nuevasala);
 	})
 
-	socket.on('sendchat',function(message){
-		var usu = socket.username;
-		console.log(message);
-		io.sockets.in(socket.room).emit('updatechat', socket.username, message);
+	socket.on('sendchat',function(message,username){
+		var usu = username;
+		console.log("el Mensaje "+ message +"ha sido enviado por "+usu);
+		io.sockets.in(socket.room).emit('updatechat', usu, message);
 	})
 	
 	

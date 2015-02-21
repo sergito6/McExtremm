@@ -1,3 +1,4 @@
+var socket = io.connect('http://localhost:8080');
 $(function(){ // funcion para crear sala
 		
 		$('#datasend').click( function() {
@@ -42,16 +43,16 @@ var divFunction = function(){
 
 // sala.html
 
-$(function(){
-		// when the client clicks SEND
+$(function(){ // enviar mensaje
+		
 		$('#textsend').click( function() {
 			var message = $('#message').val();
 			$('#message').val('');
-			// tell server to execute 'sendchat' and send along one parameter
-			socket.emit('sendchat', message);
+			console.log(socket.username);
+			socket.emit('sendchat', message,socket.username);
 		});
 
-		// when the client hits ENTER on their keyboard
+		
 		$('#textsend').keypress(function(e) {
 			if(e.which == 13) {
 				$(this).blur();
